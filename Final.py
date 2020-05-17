@@ -1,7 +1,7 @@
 import sys
 import validators
 import requests
-
+import time
 url ="http://demo7130536.mockable.io/final-contacts-100"
 exit = False
 
@@ -127,7 +127,38 @@ def listaryver():
             print(f"    extra: {contacts[letra][nombre][extra]}:")
     #------------------------------------------------------------------
 
-    
+def borrarcontacto():
+    #iniciar variables------------------------------------------------
+    NoContacto = {}
+    contador = 0
+    #-----------------------------------------------------------------
+
+    #listar contactos-------------------------------------------------
+    for letra in contacts:
+        print(f"{letra}: ")
+        for persona in contacts[letra]:
+            contador= contador+1
+            print(f"    {contador}. {persona}")
+            NoContacto[contador] = persona
+    print("\n-------------------------")
+    contacto = input("Borrar Contacto: ")
+    #----------------------------------------------------------------
+
+    #borrar contacto--------------------------------------------------
+    if(contacto.isdigit()):
+        contacto = int(contacto)
+        nombre = NoContacto[contacto]
+        letra = nombre[0]
+        contacts[letra].pop(nombre)
+        print(f"\nContacto '{nombre}' Borrado")
+    else:
+        letra = contacto[0]
+        contacts[letra].pop(contacto)
+        print(f"\nContacto '{contacto}' Borrado")
+        
+    for i in range(3):
+        time.sleep(0.5)
+    #----------------------------------------------------------------
 while not exit:
     print("\n----------------------------Menu----------------------------")
     print(" 1. Agregar contacto \n 2. Buscar Contacto\n 3. Listar contacto\n 4. Borrar contacto\n 5. Llamar contactos\n 6. Enviar mensaje a contactos\n 7. Enviar correo a contacto\n 8. Exportar contactos\n 9. Salir")
@@ -141,15 +172,15 @@ while not exit:
         print("---------------------------------------------------------")
     if input_menu == 2:
         print("\n----------------Buscar contacto------------------------")
-        pass
+        buscarcontacto()
         print("---------------------------------------------------------\n")
     if input_menu == 3:
         print("\n----------------Lista contactos------------------------\n")
-        pass
+        listaryver()
         print("---------------------------------------------------------")
     if input_menu == 4:
         print("\n----------------Borrar contacto------------------------\n")
-        pass
+        borrarcontacto()
         print("---------------------------------------------------------")
     if input_menu == 5:
         print("\n----------------Llamar contacto------------------------\n")
