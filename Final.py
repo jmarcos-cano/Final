@@ -1,14 +1,17 @@
 import sys
 import validators
 import requests
+import csv
 import time
+from win10toast import ToastNotifier
+import emoji
+toaster = ToastNotifier()
 url ="http://demo7130536.mockable.io/final-contacts-100"
 exit = False
 
 peticion = requests.get(url)
 
 contacts = peticion.json()
-
 
 def agregarcontacto():
 
@@ -74,6 +77,7 @@ def agregarcontacto():
         contacts[inicial] = {input_nombre:{"telefono":input_telefono, "email": input_email, "company": input_compañia, "extra":input_nota}}
     #----------------------------------------------------------------------------------------------------------------------------------------
 
+
 def buscarcontacto():
     buscar = input("Buscar: ")
     print("Resultados:")
@@ -91,6 +95,7 @@ def buscarcontacto():
     #---------------------------------------------------------------
     if(resultados == 0):
         print("- No hay resultados")
+
 
 
 def listaryver():
@@ -127,6 +132,7 @@ def listaryver():
             print(f"    extra: {contacts[letra][nombre][extra]}:")
     #------------------------------------------------------------------
 
+
 def borrarcontacto():
     #iniciar variables------------------------------------------------
     NoContacto = {}
@@ -159,6 +165,7 @@ def borrarcontacto():
     for i in range(3):
         time.sleep(0.5)
     #----------------------------------------------------------------
+    
 
 def llamarcontacto():
     #iniciar variables-----------------------------------------------
@@ -223,6 +230,7 @@ def enviarmensaje():
     print(f"      >{mensaje}")
     #---------------------------------------------------------------------------------------
 
+
 def enviarcorreo():
     #iniciar variables---------------------------------------------------------------------
     NoContacto = {}
@@ -255,6 +263,22 @@ def enviarcorreo():
     #--------------------------------------------------------------------------------------------
 
 
+def exportarcontactos():
+    #Exportar contacto------------------------------------------------------------------------------------------------------------------------------------------------------------
+    with open('contact_manager.csv', 'w', newline='') as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerow(["Contacto nombre","telefono","correo","empresa","extra"])
+        telefono = "telefono"
+        email = "email"
+        company = "company"
+        extra = "extra"
+        for letra in contacts:
+            for persona in contacts[letra]:
+                writer.writerow([persona,contacts[letra][persona][telefono],contacts[letra][persona][email], contacts[letra][persona][company], contacts[letra][persona][extra]])
+        print("Contactos exportados exitosamente!")
+    #-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 while not exit:
     print("\n----------------------------Menu----------------------------")
     print(" 1. Agregar contacto \n 2. Buscar Contacto\n 3. Listar contacto\n 4. Borrar contacto\n 5. Llamar contactos\n 6. Enviar mensaje a contactos\n 7. Enviar correo a contacto\n 8. Exportar contactos\n 9. Salir")
@@ -266,6 +290,8 @@ while not exit:
         print("\n----------------Agregar contacto------------------------\n")
         agregarcontacto()
         print("---------------------------------------------------------")
+        print("Contacto guardado exitosamente!")
+        print("------------------------------------------------------")
     if input_menu == 2:
         print("\n----------------Buscar contacto------------------------")
         buscarcontacto()
@@ -288,11 +314,11 @@ while not exit:
         print("---------------------------------------------------------")
     if input_menu == 7:
         print("\n----------------Enviar correo------------------------\n")
-        pass
+        enviarcorreo()
         print("---------------------------------------------------------")
     if input_menu == 8:
         print("\n----------------Exportar contactos------------------------")
-        pass
+        exportarcontactos()
         print("---------------------------------------------------------")
     elif input_menu == 9:
         exit = True
