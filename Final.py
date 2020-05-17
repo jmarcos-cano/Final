@@ -194,6 +194,35 @@ def llamarcontacto():
         time.sleep(0.5)
     #-----------------------------------------------------------------------------------
 
+def enviarmensaje():
+    #iniciar variable------------------------------------------------------------------
+    NoContacto = {}
+    contador = 0
+    #-----------------------------------------------------------------------------------
+
+    #listar contacto----------------------------------------------------------------------
+    for letra in contacts:
+        print(f"{letra}: ")
+        for persona in contacts[letra]:
+            contador= contador+1
+            print(f"    {contador}. {persona}")
+            NoContacto[contador] = persona
+    print("\n-------------------------------------")
+    contacto = input("Contacto: ")
+    #-------------------------------------------------------------------------------------
+
+    #Enviar Mensaje-----------------------------------------------------------------------
+    if(contacto.isdigit()):
+        contacto = int(contacto)
+        contacto = NoContacto[contacto]
+    print(f"'{contacto}'")
+    letra = contacto[0]
+    mensaje = input("Mensaje: ")
+    telefono = "telefono"
+    print(f"\nHola '{contacto}'  {contacts[letra][contacto][telefono]}")
+    print(f"      >{mensaje}")
+    #---------------------------------------------------------------------------------------
+
 
 while not exit:
     print("\n----------------------------Menu----------------------------")
@@ -224,7 +253,7 @@ while not exit:
         print("---------------------------------------------------------")
     if input_menu == 6:
         print("\n----------------Enviar mensaje------------------------\n")
-        pass
+        enviarmensaje()
         print("---------------------------------------------------------")
     if input_menu == 7:
         print("\n----------------Enviar correo------------------------\n")
