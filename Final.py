@@ -73,6 +73,27 @@ def agregarcontacto():
     else:
         contacts[inicial] = {input_nombre:{"telefono":input_telefono, "email": input_email, "company": input_compañia, "extra":input_nota}}
     #----------------------------------------------------------------------------------------------------------------------------------------
+
+def buscarcontacto():
+    buscar = input("Buscar: ")
+    print("Resultados:")
+    resultados = 0
+
+    #ciclo para buscar a la persona--------------------------------
+    for letra in contacts:
+        for persona in contacts[letra]:
+            nombre = persona.lower()
+            nombre = nombre.split()
+            buscar = buscar.lower()
+            if(buscar in nombre):
+                resultados = 1
+                print(f"- {persona}")
+    #---------------------------------------------------------------
+    if(resultados == 0):
+        print("- No hay resultados")
+
+
+
 while not exit:
     print("\n----------------------------Menu----------------------------")
     print(" 1. Agregar contacto \n 2. Buscar Contacto\n 3. Listar contacto\n 4. Borrar contacto\n 5. Llamar contactos\n 6. Enviar mensaje a contactos\n 7. Enviar correo a contacto\n 8. Exportar contactos\n 9. Salir")
