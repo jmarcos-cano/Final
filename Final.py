@@ -93,7 +93,41 @@ def buscarcontacto():
         print("- No hay resultados")
 
 
+def listaryver():
+    #iniciar varaibles------------------------------------------------
+    NoContacto = {}
+    contador = 0
+    #-----------------------------------------------------------------
 
+    #listar contacto--------------------------------------------------
+    for letra in contacts:
+        print(f"{letra}: ")
+        for persona in contacts[letra]:
+            contador= contador+1
+            print(f"    {contador}. {persona}")
+            NoContacto[contador] = persona
+    print("\n-------------------------------------")
+    vercontacto = int(input("Ver Contacto: "))
+    print("\n")
+    #------------------------------------------------------------------
+
+    #ver contacto------------------------------------------------------
+    for contacto in NoContacto:
+        if(vercontacto == contacto):
+            nombre = NoContacto[contacto]
+            letra = nombre[0]
+            telefono = "telefono"
+            email = "email"
+            company = "company"
+            extra = "extra"
+            print(f"{NoContacto[vercontacto]}:")
+            print(f"    telefono: {contacts[letra][nombre][telefono]}:")
+            print(f"    email: {contacts[letra][nombre][email]}:")
+            print(f"    company: {contacts[letra][nombre][company]}:")
+            print(f"    extra: {contacts[letra][nombre][extra]}:")
+    #------------------------------------------------------------------
+
+    
 while not exit:
     print("\n----------------------------Menu----------------------------")
     print(" 1. Agregar contacto \n 2. Buscar Contacto\n 3. Listar contacto\n 4. Borrar contacto\n 5. Llamar contactos\n 6. Enviar mensaje a contactos\n 7. Enviar correo a contacto\n 8. Exportar contactos\n 9. Salir")
