@@ -223,6 +223,37 @@ def enviarmensaje():
     print(f"      >{mensaje}")
     #---------------------------------------------------------------------------------------
 
+def enviarcorreo():
+    #iniciar variables---------------------------------------------------------------------
+    NoContacto = {}
+    contador = 0
+    #--------------------------------------------------------------------------------------
+
+    #listar contactos-----------------------------------------------------------------------
+    for letra in contacts:
+        print(f"{letra}: ")
+        for persona in contacts[letra]:
+            contador= contador+1
+            print(f"    {contador}. {persona}")
+            NoContacto[contador] = persona
+    print("\n-------------------------------------")
+    #----------------------------------------------------------------------------------------
+
+    #enviar correo----------------------------------------------------------------------------
+    contacto = input("Contacto: ")
+    if(contacto.isdigit()):
+        contacto = int(contacto)
+        contacto = NoContacto[contacto]
+    print(f"'{contacto}'")
+    letra = contacto[0]
+    subject = input("Subject: ")
+    mensaje = input("Mensaje: ")
+    email = "email"
+    print(f"\nEnviar correo a '{contacto}'  {contacts[letra][contacto][email]}")
+    print(f"      >Subject: {subject}")
+    print(f"      >Mensaje: {mensaje}")
+    #--------------------------------------------------------------------------------------------
+
 
 while not exit:
     print("\n----------------------------Menu----------------------------")
