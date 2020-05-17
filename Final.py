@@ -159,6 +159,42 @@ def borrarcontacto():
     for i in range(3):
         time.sleep(0.5)
     #----------------------------------------------------------------
+
+def llamarcontacto():
+    #iniciar variables-----------------------------------------------
+    NoContacto = {}
+    contador = 0
+    #---------------------------------------------------------------
+
+    #listar contactos-----------------------------------------------
+    for letra in contacts:
+        print(f"{letra}: ")
+        for persona in contacts[letra]:
+            contador= contador+1
+            print(f"    {contador}. {persona}")
+            NoContacto[contador] = persona
+    print("\n-------------------------------------")
+    contacto = input("Llamar Contacto: ")
+    #-----------------------------------------------------------------
+
+    #llamar contacto--------------------------------------------------
+    if(contacto.isdigit()):
+        contacto = int(contacto)
+        nombre = NoContacto[contacto]
+        letra = nombre[0]
+        contacts[letra]
+        telefono = "telefono"
+        print(f"\nLlamando a '{nombre}' al {contacts[letra][nombre][telefono]}")
+    else:
+        letra = contacto[0]
+        telefono = "telefono"
+        print(f"\nLlamando a '{contacto}' al {contacts[letra][contacto][telefono]}")
+
+    for i in range(3):
+        time.sleep(0.5)
+    #-----------------------------------------------------------------------------------
+
+
 while not exit:
     print("\n----------------------------Menu----------------------------")
     print(" 1. Agregar contacto \n 2. Buscar Contacto\n 3. Listar contacto\n 4. Borrar contacto\n 5. Llamar contactos\n 6. Enviar mensaje a contactos\n 7. Enviar correo a contacto\n 8. Exportar contactos\n 9. Salir")
@@ -184,7 +220,7 @@ while not exit:
         print("---------------------------------------------------------")
     if input_menu == 5:
         print("\n----------------Llamar contacto------------------------\n")
-        pass
+        llamarcontacto()
         print("---------------------------------------------------------")
     if input_menu == 6:
         print("\n----------------Enviar mensaje------------------------\n")
@@ -195,7 +231,7 @@ while not exit:
         pass
         print("---------------------------------------------------------")
     if input_menu == 8:
-        print("\n----------------Enviar correo------------------------")
+        print("\n----------------Exportar contactos------------------------")
         pass
         print("---------------------------------------------------------")
     elif input_menu == 9:
